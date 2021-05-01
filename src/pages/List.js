@@ -15,7 +15,10 @@ export default class List extends Component {
       articles: [],
       rows: [0, 1, 2],
       cols: [0, 1, 2, 3],
+      filter: '',
     };
+
+    this.inputFilter = this.inputFilter.bind(this);
   }
 
   getLocalStorage() {
@@ -23,6 +26,14 @@ export default class List extends Component {
     this.setState({
       articles: blog.articles,
     });
+  }
+
+  inputFilter(event) {
+    event.preventDefault();
+    this.setState({
+      filter: event.target.value,
+    });
+    position = -1;
   }
 
   componentDidMount() {
@@ -34,29 +45,38 @@ export default class List extends Component {
     position = -1;
   }
   render() {
-    const { articles, rows, cols } = this.state;
+    const { articles, rows, cols, filter } = this.state;
 
-    // console.log(this.state);
+    // console.log(position);
+    const filteredArticles = articles.filter(
+      (article) =>
+        article.title.toLowerCase().includes(filter) ||
+        article.words.toLowerCase().includes(filter),
+    );
+    // console.log('filteredArticles', filteredArticles);
+
     return (
       <div className="articles-list">
-        <MyFilterInputText />
+        <MyFilterInputText inputFilter={this.inputFilter} filter={filter} />
         {articles.length > 0 &&
           rows.map((r, i) => {
             return (
-              <div className="row" key={r}>
+              <div className="row" key={r} data-testid={`card-row-${r}`}>
                 {cols.map((col, j) => {
                   // console.log(position);
-                  if (position >= articles.length - 1) {
+                  if (position > filteredArticles.length - 2) {
                     return null;
                   }
                   position += 1;
                   return (
-                    <div className="col s12 m6 l3">
+                    <div className="col s12 m6 l3" key={col * 100}>
+                      {/* {console.log(filteredArticles[position].title)} */}
                       <MyCardArticles
-                        title={articles[position].title}
-                        image={articles[position].image}
-                        words={articles[position].words}
+                        title={filteredArticles[position].title}
+                        image={filteredArticles[position].image}
+                        words={filteredArticles[position].words}
                         position={position}
+                        key={j}
                       />
                     </div>
                   );

@@ -41,7 +41,8 @@
   "jest": {
     "coveragePathIgnorePatterns": [
       "index.js",
-      "reportWebVitals.js"
+      "reportWebVitals.js",
+      "serviceWorker.js"
     ],
     "coverageReporters": [
       "json",

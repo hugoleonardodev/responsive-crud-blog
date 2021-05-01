@@ -38,7 +38,7 @@ export default class Create extends Component {
 
   createArticle(event) {
     event.preventDefault();
-    console.log(this.state.title);
+    // console.log(this.state.title);
     const { articles, favorites } = JSON.parse(localStorage.getItem('blog'));
     const { title, image, words } = this.state;
     const newArticle = { title, image, words };
@@ -54,7 +54,7 @@ export default class Create extends Component {
 
   componentDidMount() {
     // resizing text area accordly with words size
-    console.log(this.state);
+    // console.log(this.state);
     M.textareaAutoResize(document.querySelector('.materialize-textarea'));
   }
   render() {

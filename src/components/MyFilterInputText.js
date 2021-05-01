@@ -3,14 +3,15 @@ import React, { Component } from 'react';
 
 export default class MyFilterInputText extends Component {
   render() {
-    const { filter, handleChange } = this.props;
+    const { filter, inputFilter } = this.props;
     return (
       <>
         <div className="input-field col s6">
           <i className="material-icons prefix">filter_alt</i>
           <input
+            data-testid="filtering-input"
             className="validate"
-            onChange={handleChange}
+            onChange={inputFilter}
             value={filter}
             name="filter"
             type="text"

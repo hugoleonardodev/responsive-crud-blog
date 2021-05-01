@@ -9,7 +9,7 @@ export default class Home extends Component {
     return (
       <div>
         <h1 className="title"> My Beatiful Blog</h1>
-        <h3 className="description">A beatiful landscapes blob</h3>
+        <h2 className="description">A beatiful landscapes blob</h2>
         <MyCarousel />
         <MyFloatingActionButtons />
       </div>

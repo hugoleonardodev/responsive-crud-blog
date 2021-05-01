@@ -16,7 +16,10 @@ export default class Favorites extends Component {
       favorites: [],
       rows: [0, 1, 2],
       cols: [0, 1, 2, 3],
+      filter: '',
     };
+
+    this.inputFilter = this.inputFilter.bind(this);
   }
 
   getLocalStorage() {
@@ -24,6 +27,14 @@ export default class Favorites extends Component {
     this.setState({
       favorites: blog.favorites,
     });
+  }
+
+  inputFilter(event) {
+    event.preventDefault();
+    this.setState({
+      filter: event.target.value,
+    });
+    position = -1;
   }
 
   componentDidMount() {
@@ -35,28 +46,40 @@ export default class Favorites extends Component {
     position = -1;
   }
   render() {
-    const { favorites, rows, cols } = this.state;
+    const { favorites, rows, cols, filter } = this.state;
 
+    const filteredArticles = favorites.filter(
+      (article) =>
+        article.title.toLowerCase().includes(filter) ||
+        article.words.toLowerCase().includes(filter),
+    );
     // console.log(this.state);
     return (
       <div className="articles-list">
-        <MyFilterInputText />
+        <MyFilterInputText inputFilter={this.inputFilter} filter={filter} />
         {favorites.length > 0 &&
           rows.map((r, i) => {
             return (
-              <div className="row" key={r}>
+              <div
+                className="row"
+                key={`favorite-row-${r}`}
+                data-testid={`card-row-${r}`}
+              >
                 {cols.map((col, j) => {
                   // console.log(position);
-                  if (position >= favorites.length - 1) {
+                  if (position >= filteredArticles.length - 2) {
                     return null;
                   }
                   position += 1;
                   return (
-                    <div className="col s12 m6 l3">
+                    <div
+                      className="col s12 m6 l3"
+                      key={10 + j + i + r + col * 10}
+                    >
                       <MyCardArticles
-                        title={favorites[position].title}
-                        image={favorites[position].image}
-                        words={favorites[position].words}
+                        title={filteredArticles[position].title}
+                        image={filteredArticles[position].image}
+                        words={filteredArticles[position].words}
                         position={position}
                       />
                     </div>

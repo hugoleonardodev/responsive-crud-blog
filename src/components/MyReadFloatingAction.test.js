@@ -1,7 +1,7 @@
-import { screen, cleanup, act, fireEvent } from '@testing-library/react';
+import { screen, cleanup, fireEvent } from '@testing-library/react';
 import MyReadFloatingActionButtons from './MyReadFloatingActionButtons';
 import renderWithRouter from '../configs/renderWithRouter';
-import userEvent from '@testing-library/user-event';
+// import userEvent from '@testing-library/user-event';
 import carouselInitialState from '../data/carouselInitialState';
 import { createMemoryHistory } from 'history';
 import M from 'materialize-css';
@@ -23,17 +23,18 @@ afterEach(() => {
   cleanup();
 });
 
-// const { toast } = M;
+// const { toast } = M; X WRONG
 
-// const myMock = jest.fn();
+// const myMock = jest.fn(); X WRONG
 
 const mokTost = {
   html: 'Successfuly added to favorites!',
   classes: 'round',
 };
 
-// const mockedToast = myMock.mockImplementation(toast);
+// const mockedToast = myMock.mockImplementation(toast); X WRONG
 
+// the nice way to mock objects
 const mockedExchange = jest.spyOn(M, 'toast').mockImplementation(() => mokTost);
 
 describe('MyReadFloatingActionButtons.js component', () => {

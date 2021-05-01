@@ -62,6 +62,6 @@ describe('Create.js page', () => {
     userEvent.click(createBtn);
 
     const { articles } = JSON.parse(localStorage.getItem('blog'));
-    expect(articles.length).toBe(11);
+    expect(articles.length).toBe(6);
   });
 });

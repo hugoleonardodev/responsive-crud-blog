@@ -39,9 +39,9 @@ export default class MyCarousel extends Component {
       duration: 500,
       // fullWidth: true, // another version for the carousel
       // numVisible: 10, // max five
-      onCycleTo: () => {
-        console.log('New Slide'); // callback when click on new slide
-      },
+      // onCycleTo: () => {
+      //   console.log('New Slide'); // callback when click on new slide
+      // },
     };
 
     M.Carousel.init(this.Carousel, options);
@@ -64,6 +64,7 @@ export default class MyCarousel extends Component {
 
   render() {
     const { articles } = this.state;
+    // console.log(articles);
     return (
       <div>
         <div
@@ -72,73 +73,63 @@ export default class MyCarousel extends Component {
           }}
           className="carousel"
         >
-          {articles.length > 0 ? (
-            articles.slice(0, 5).map((article, index) => (
-              <Link
-                className="tooltipped carousel-item"
-                data-tooltip={article.title}
-                data-testid={`update-${index}`}
-                to={article.route}
-                // key={index} not rendering when key is enabled
-              >
-                <img alt={article.title} src={article.image} />
-              </Link>
-            ))
-          ) : (
-            <>
-              <Link
-                className="tooltipped carousel-item"
-                data-tooltip="1"
-                to="/update/1"
-              >
-                <img
-                  alt="1"
-                  src="https://eskipaper.com/images/landscape-photos-21.jpg"
-                />
-              </Link>
-              <Link
-                className="tooltipped carousel-item"
-                data-tooltip="2"
-                to="/update/2"
-              >
-                <img
-                  alt="2"
-                  src="https://www.wallpapertip.com/wmimgs/6-62055_nature-pictures-of-oil-paintings-landscape.jpg"
-                />
-              </Link>
-              <Link
-                className="tooltipped carousel-item"
-                data-tooltip="3"
-                to="/update/3"
-              >
-                <img
-                  alt="3"
-                  src="https://www.teahub.io/photos/full/54-547365_beautiful-landscape-wallpaper.jpg"
-                />
-              </Link>
-              <Link
-                className="tooltipped carousel-item"
-                data-tooltip="4"
-                to="/update/4"
-              >
-                <img
-                  alt="4"
-                  src="https://images.hdqwalls.com/download/pixel-landscape-dt-1600x1200.jpg"
-                />
-              </Link>
-              <Link
-                className="tooltipped carousel-item"
-                href="https://www.google.com"
-                data-tooltip="5"
-                to="/update/5"
-              >
-                <img
-                  alt="5"
-                  src="https://eskipaper.com/images/beautiful-winter-landscape-8.jpg"
-                />
-              </Link>
-            </>
-          )}
+          <div>
+            <Link
+              className="tooltipped carousel-item"
+              data-tooltip={articles.length > 0 ? articles[4].title : 'default'}
+              to={`/update/${articles.length}`}
+              data-testid={`update-${articles.length - 1}`}
+            >
+              <img
+                alt={articles.length > 0 ? articles[4].title : 'default'}
+                src={articles.length > 0 ? articles[4].image : 'default'}
+              />
+            </Link>
+            <Link
+              className="tooltipped carousel-item"
+              data-tooltip={articles.length > 0 ? articles[3].title : 'default'}
+              to={`/update/${articles.length}`}
+              data-testid={`update-${articles.length - 2}`}
+            >
+              <img
+                alt={articles.length > 0 ? articles[3].title : 'default'}
+                src={articles.length > 0 ? articles[3].image : 'default'}
+              />
+            </Link>
+            <Link
+              className="tooltipped carousel-item"
+              data-tooltip={articles.length > 0 ? articles[2].title : 'default'}
+              to={`/update/${articles.length}`}
+              data-testid={`update-${articles.length - 3}`}
+            >
+              <img
+                alt={articles.length > 0 ? articles[2].title : 'default'}
+                src={articles.length > 0 ? articles[2].image : 'default'}
+              />
+            </Link>
+            <Link
+              className="tooltipped carousel-item"
+              data-tooltip={articles.length > 0 ? articles[1].title : 'default'}
+              to={`/update/${articles.length}`}
+              data-testid={`update-${articles.length - 4}`}
+            >
+              <img
+                alt={articles.length > 0 ? articles[1].title : 'default'}
+                src={articles.length > 0 ? articles[1].image : 'default'}
+              />
+            </Link>
+            <Link
+              className="tooltipped carousel-item"
+              data-tooltip={articles.length > 0 ? articles[0].title : 'default'}
+              to={`/update/${articles.length}`}
+              data-testid={`update-${articles.length - 5}`}
+            >
+              <img
+                alt={articles.length > 0 ? articles[0].title : 'default'}
+                src={articles.length > 0 ? articles[0].image : 'default'}
+              />
+            </Link>
+          </div>
         </div>
       </div>
     );
